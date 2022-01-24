@@ -1,30 +1,40 @@
 const requestsController = (() => {
+  function Forecast(data) {
+    this.location = data.name;
+    this.country = data.sys.country;
+    this.description = data.weather[0].description;
+    this.icon_url = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+    this.temperature = data.main.temp;
+    this.feels_like = data.main.feels_like;
+    this.humidity = data.main.humidity;
+    this.min = data.main.temp_min;
+    this.max = data.main.temp_max;
+    this.wind = data.wind.speed;
+    this.cloudiness = data.clouds.all;
+    this.visibility = data.visibility;
+    this.sunrise = data.sys.sunrise;
+    this.sunset = data.sys.sunset;
+  }
+
   async function getWeatherByLocation(keyword) {
     try {
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${keyword}&APPID=f501bae5a6ace260330d16f409ec0a35`,
         { mode: 'cors' }
       );
-      const data = await response.json();
-      const forecast = {
-        location: data.name,
-        country: data.sys.country,
-        description: data.weather[0].description,
-        icon_url: `http://openweathermap.org/img/w/${data.weather[0].icon}.png`,
-        temperature: data.main.temp,
-        feels_like: data.main.feels_like,
-        humidity: data.main.humidity,
-        min: data.main.temp_min,
-        max: data.main.temp_max,
-        wind: data.wind.speed,
-        cloudiness: data.clouds.all,
-        visibility: data.visibility,
-        sunrise: data.sys.sunrise,
-        sunset: data.sys.sunset,
-      };
-      console.log(forecast);
+
+      if (response.ok) {
+        const data = await response.json();
+        return new Forecast(data);
+      }
+
+      if (response.status === 404) {
+        throw new Error('Location not found!');
+      } else {
+        throw new Error('Something went wrong with your request!');
+      }
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
