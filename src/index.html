@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="<%= require('./images/sun.png') %>" />
+    <link rel="icon" type="image/png" href="<%= require('./images/cloudy-day.png') %>" />
     <title>Weather App</title>
 </head>
-<body>
+<body class="bg-light text-center">
+  <h1 class="font-italic my-3">Search for your location</h1>
 
+  <form class="form-inline justify-content-center">
+    <input class="form-control mr-sm-2" type="search" placeholder="Keyword" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
 </body>
 </body>
 </html>
