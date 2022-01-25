@@ -6,6 +6,22 @@ $theme-colors: (
 
 @import "bootstrap";
 
+@mixin for-screen {
+  @media (min-width: 0px) { @content; }
+}
+@mixin for-sm-screen {
+  @media (min-width: 576px) { @content; }
+}
+@mixin for-md-screen {
+  @media (min-width: 768px) { @content; }
+}
+@mixin for-lg-screen {
+  @media (min-width: 992px) { @content; }
+}
+@mixin for-xl-screen {
+  @media (min-width: 1200px) { @content; }
+}
+
 body, html {
   height: 100%;
 }
@@ -63,39 +79,49 @@ input[type=search]::-ms-reveal {  display: none; width : 0; height: 0; }
   background-size: cover;
 
   &.thunderstorm {
-    background-image: url("https://media1.giphy.com/media/QuGHBsYciDZzG/giphy.gif?cid=5d0a86331c5f2bdaa5c6fa95eeaf7af3b65f5287cecebc90&rid=giphy.gif&ct=g");
+    background-image: url("https://media.giphy.com/media/3oEjHB1EKuujDjYFWw/giphy.gif");
   }
 
-  &.clear-sky{
-    background-image: url("https://media.giphy.com/media/XBVHoZahgO0sskTGxa/giphy.gif");
-  }
-
-  &.few-clouds{
-    background-image: url("https://media.giphy.com/media/u01ioCe6G8URG/giphy.gif");
-  }
-
-  &.scattered-clouds{
-    background-image: url("https://media.giphy.com/media/HoUgegTjteXCw/giphy.gif");
-  }
-
-  &.broken-clouds{
-    background-image: url("https://media.giphy.com/media/5HK4TiiBeLSZq/giphy.gif");
-  }
-
-  &.shower-rain{
-    background-image: url("https://media.giphy.com/media/fPkWsBe1wWPtu/giphy.gif");
-  }
-
-  &.rain{
+  &.drizzle {
     background-image: url("https://media.giphy.com/media/l0IrIkq7Q3iRII0hy/giphy.gif");
   }
 
-  &.snow{
-    background-image: url("https://media.giphy.com/media/BDucPOizdZ5AI/giphy.gif");
+  &.rain {
+    background-image: url("https://media.giphy.com/media/5torEEM8QnR95Cqg11/giphy.gif");
   }
 
-  &.mist{
+  &.snow {
+    background-image: url("https://media.giphy.com/media/dAyD6PWoQRs40/giphy.gif");
+  }
+
+  &.mist {
     background-image: url("https://media.giphy.com/media/11uphU5Zfgk1vW/giphy.gif");
+  }
+
+  &.clear {
+    background-image: url("https://media.giphy.com/media/XBVHoZahgO0sskTGxa/giphy.gif");
+  }
+
+  &.clouds {
+    background-image: url("https://media.giphy.com/media/5HK4TiiBeLSZq/giphy.gif");
+  }
+
+  &.error {
+    @include for-screen {
+      height: 300px;
+    }
+
+    @include for-md-screen {
+      height: 600px;
+    }
+
+    &.location-not-found {
+      background-image: url("https://media.giphy.com/media/g01ZnwAUvutuK8GIQn/giphy.gif");
+    }
+
+    &.other {
+      background-image: url("https://media.giphy.com/media/3oKIPs1EVbbNZYq7EA/giphy.gif");
+    }
   }
 }
 
