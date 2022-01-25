@@ -2,6 +2,7 @@ const requestsController = (() => {
   function Forecast(data) {
     this.location = data.name;
     this.country = data.sys.country;
+    this.main = data.weather[0].main;
     this.description = data.weather[0].description;
     this.icon_url = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
     this.temperature = data.main.temp;

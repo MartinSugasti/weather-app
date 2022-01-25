@@ -1,3 +1,102 @@
+$theme-colors: (
+  primary: #313050,
+  primary-light: #5a5973,
+  primary-dark: #1d1d30
+);
+
+@import "bootstrap";
+
 body, html {
   height: 100%;
 }
+
+#search-input {
+  background: url('../images/magnifying-glass-solid.svg') 96%/20px no-repeat;
+}
+
+
+/* clears the 'X' from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+/* clears the 'X' from Internet Explorer */
+input[type=search]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=search]::-ms-reveal {  display: none; width : 0; height: 0; }
+
+
+/* custom radio buttons */
+.custom-control-input:checked~.custom-control-label::before {
+  color: theme-color('light');
+  border-color: theme-color('light');
+  border-width: 1px;
+}
+
+.custom-control-input:checked~.custom-control-label.green::before {
+  background-color: theme-color('primary');
+}
+
+
+/* Make background gradient */
+.custom-gradient {
+  /* fallback for old browsers */
+  background: #667eea;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to bottom, theme-color('primary'), theme-color('primary-light'));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to bottom, theme-color('primary'), theme-color('primary-light'))
+}
+
+
+/* icons */
+.info-detail {
+  width: 60px;;
+}
+
+
+/* card background */
+.card-background {
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &.thunderstorm {
+    background-image: url("https://media1.giphy.com/media/QuGHBsYciDZzG/giphy.gif?cid=5d0a86331c5f2bdaa5c6fa95eeaf7af3b65f5287cecebc90&rid=giphy.gif&ct=g");
+  }
+
+  &.clear-sky{
+    background-image: url("https://media.giphy.com/media/XBVHoZahgO0sskTGxa/giphy.gif");
+  }
+
+  &.few-clouds{
+    background-image: url("https://media.giphy.com/media/u01ioCe6G8URG/giphy.gif");
+  }
+
+  &.scattered-clouds{
+    background-image: url("https://media.giphy.com/media/HoUgegTjteXCw/giphy.gif");
+  }
+
+  &.broken-clouds{
+    background-image: url("https://media.giphy.com/media/5HK4TiiBeLSZq/giphy.gif");
+  }
+
+  &.shower-rain{
+    background-image: url("https://media.giphy.com/media/fPkWsBe1wWPtu/giphy.gif");
+  }
+
+  &.rain{
+    background-image: url("https://media.giphy.com/media/l0IrIkq7Q3iRII0hy/giphy.gif");
+  }
+
+  &.snow{
+    background-image: url("https://media.giphy.com/media/BDucPOizdZ5AI/giphy.gif");
+  }
+
+  &.mist{
+    background-image: url("https://media.giphy.com/media/11uphU5Zfgk1vW/giphy.gif");
+  }
+}
+
+
