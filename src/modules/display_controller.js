@@ -62,9 +62,6 @@ const displayController = (() => {
   }
 
   function showForecast(data) {
-    const outterDiv = document.getElementById('card-container');
-    outterDiv.innerHTML = '';
-
     const card = document.createElement('div');
     card.innerHTML = '';
     card.classList.add(
@@ -77,7 +74,6 @@ const displayController = (() => {
       'card-background',
       `${data.main.toLowerCase()}`
     );
-    outterDiv.appendChild(card);
 
     const locationDiv = document.createElement('div');
     locationDiv.classList.add('mt-4');
@@ -150,12 +146,13 @@ const displayController = (() => {
     showPropertyInfo(propertiesDiv, parseInt(data.humidity, 10), '%', humidityIcon);
     showPropertyInfo(propertiesDiv, parseInt(data.cloudiness, 10), '%', cloudinessIcon);
     showPropertyInfo(propertiesDiv, parseInt(data.visibility / 1000, 10), 'km', visibilityIcon);
+
+    const outterDiv = document.getElementById('card-container');
+    outterDiv.innerHTML = '';
+    outterDiv.appendChild(card);
   }
 
   function showError(error) {
-    const outterDiv = document.getElementById('card-container');
-    outterDiv.innerHTML = '';
-
     const card = document.createElement('div');
     card.innerHTML = '';
     const errorClass = error.message === '404' ? 'location-not-found' : 'other';
@@ -170,6 +167,9 @@ const displayController = (() => {
       'error',
       errorClass
     );
+
+    const outterDiv = document.getElementById('card-container');
+    outterDiv.innerHTML = '';
     outterDiv.appendChild(card);
   }
 
