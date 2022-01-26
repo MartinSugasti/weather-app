@@ -80,13 +80,17 @@ const displayController = (() => {
     outterDiv.appendChild(card);
 
     const locationDiv = document.createElement('div');
-    locationDiv.classList.add('my-4');
+    locationDiv.classList.add('mt-4');
     card.appendChild(locationDiv);
 
     const locationHeader = document.createElement('h1');
     locationHeader.classList.add('mb-0');
     locationHeader.innerHTML = `${data.location}, ${data.country}`;
     locationDiv.appendChild(locationHeader);
+
+    const flagSpan = document.createElement('span');
+    flagSpan.classList.add('flag-icon', `flag-icon-${data.country.toLowerCase()}`, 'mt-4');
+    locationDiv.appendChild(flagSpan);
 
     const cardBody = document.createElement('div');
     cardBody.classList.add('card-body');
@@ -120,7 +124,7 @@ const displayController = (() => {
     cardBody.appendChild(feelsLike);
 
     const propertiesDiv = document.createElement('div');
-    propertiesDiv.classList.add('row', 'justify-content-center', 'mt-4');
+    propertiesDiv.classList.add('row', 'justify-content-center', 'mt-3');
     card.appendChild(propertiesDiv);
 
     showPropertyInfo(
