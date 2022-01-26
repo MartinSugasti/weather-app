@@ -4,3 +4,4 @@ import '@fortawesome/fontawesome-free/js/all';
 import displayController from './modules/display_controller';
 
 displayController.addSearchFunctionality();
+displayController.addUnitFunctionality();

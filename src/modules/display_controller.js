@@ -9,6 +9,25 @@ import cloudinessIcon from '../images/cloudiness.svg';
 import visibilityIcon from '../images/visibility.svg';
 
 const displayController = (() => {
+  let unitSystem = 'metric';
+
+  const systemSymbolMapping = {
+    imperial: '°F',
+    metric: '°C',
+  };
+
+  function addUnitFunctionality() {
+    document.querySelectorAll('.unit-radio-buttons').forEach((input) => {
+      input.addEventListener('change', (event) => {
+        if (event.target.value === 'celsius') {
+          unitSystem = 'metric';
+        } else {
+          unitSystem = 'imperial';
+        }
+      });
+    });
+  }
+
   function showPropertyInfo(container, value, unit, image) {
     const div = document.createElement('div');
     div.classList.add('info-detail', 'col-6', 'col-sm-3', 'col-md-1', 'mx-md-1', 'px-0');
@@ -90,12 +109,14 @@ const displayController = (() => {
 
     const temperature = document.createElement('h3');
     temperature.classList.add('card-title');
-    temperature.innerHTML = `${parseInt(data.temperature, 10)}°C`;
+    temperature.innerHTML = `${parseInt(data.temperature, 10)}${systemSymbolMapping[unitSystem]}`;
     cardBody.appendChild(temperature);
 
     const feelsLike = document.createElement('p');
     feelsLike.classList.add('card-text');
-    feelsLike.innerHTML = `Feels like ${parseInt(data.feelsLike, 10)}°C`;
+    feelsLike.innerHTML = `Feels like ${parseInt(data.feelsLike, 10)}${
+      systemSymbolMapping[unitSystem]
+    }`;
     cardBody.appendChild(feelsLike);
 
     const propertiesDiv = document.createElement('div');
@@ -109,8 +130,18 @@ const displayController = (() => {
       sunriseIcon
     );
     showPropertyInfo(propertiesDiv, timeFromUnixUTC(data.sunset + data.timezone), 'hs', sunsetIcon);
-    showPropertyInfo(propertiesDiv, parseInt(data.minTemperature, 10), '°C', minTemperatureIcon);
-    showPropertyInfo(propertiesDiv, parseInt(data.maxTemperature, 10), '°C', maxTemperatureIcon);
+    showPropertyInfo(
+      propertiesDiv,
+      parseInt(data.minTemperature, 10),
+      systemSymbolMapping[unitSystem],
+      minTemperatureIcon
+    );
+    showPropertyInfo(
+      propertiesDiv,
+      parseInt(data.maxTemperature, 10),
+      systemSymbolMapping[unitSystem],
+      maxTemperatureIcon
+    );
     showPropertyInfo(propertiesDiv, parseInt(data.wind, 10), 'm/s', windIcon);
     showPropertyInfo(propertiesDiv, parseInt(data.humidity, 10), '%', humidityIcon);
     showPropertyInfo(propertiesDiv, parseInt(data.cloudiness, 10), '%', cloudinessIcon);
@@ -123,7 +154,7 @@ const displayController = (() => {
 
     const card = document.createElement('div');
     card.innerHTML = '';
-    const errorClass = error.message === '4042' ? 'location-not-found' : 'other';
+    const errorClass = error.message === '404' ? 'location-not-found' : 'other';
     card.classList.add(
       'card',
       'text-center',
@@ -145,7 +176,7 @@ const displayController = (() => {
       event.preventDefault();
 
       const location = document.querySelector('input').value;
-      const forecast = await requestsController.getWeatherByLocation(location);
+      const forecast = await requestsController.getWeatherByLocation(location, unitSystem);
 
       if (forecast instanceof Error) {
         showError(forecast);
@@ -155,7 +186,7 @@ const displayController = (() => {
     });
   }
 
-  return { addSearchFunctionality };
+  return { addSearchFunctionality, addUnitFunctionality };
 })();
 
 export default displayController;
