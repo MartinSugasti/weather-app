@@ -186,7 +186,17 @@ const displayController = (() => {
     });
   }
 
-  return { addSearchFunctionality, addUnitFunctionality };
+  async function showInitialForecast() {
+    const forecast = await requestsController.getWeatherByLocation('Visalia', unitSystem);
+
+    if (forecast instanceof Error) {
+      showError(forecast);
+    } else {
+      showForecast(forecast);
+    }
+  }
+
+  return { addSearchFunctionality, addUnitFunctionality, showInitialForecast };
 })();
 
 export default displayController;
