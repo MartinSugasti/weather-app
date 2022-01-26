@@ -18,10 +18,10 @@ const requestsController = (() => {
     this.visibility = data.visibility;
   }
 
-  async function getWeatherByLocation(keyword) {
+  async function getWeatherByLocation(keyword, unitSystem) {
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${keyword}&units=metric&APPID=f501bae5a6ace260330d16f409ec0a35`,
+        `https://api.openweathermap.org/data/2.5/weather?q=${keyword}&units=${unitSystem}&APPID=f501bae5a6ace260330d16f409ec0a35`,
         { mode: 'cors' }
       );
 
